@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+// import { RouterOutlet } from '@angular/router';
 import { AppendPipe } from './pipes/append.pipe';
 import { DataService } from './services/data.service';
 import { PhotoService } from './services/photo.service';
 import { NgFor } from '@angular/common';
 import { Person } from './models/person';
 import { Posts } from './models/posts';
-import { response } from 'express';
-import { error } from 'console';
 import { Photos } from './models/photos';
 
 @Component({

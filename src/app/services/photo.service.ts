@@ -8,7 +8,7 @@ import { Photos } from '../models/photos';
 })
 export class PhotoService {
 
-  private photosUrl = "https://jsonplaceholder.typicode.com/photos"
+  private photosUrl = "https://jsonplaceholder.typicode.com/photos";
 
   constructor(private http: HttpClient) { }
 
