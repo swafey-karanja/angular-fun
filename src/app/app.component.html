@@ -26,6 +26,11 @@
   </tbody>
 </table>
 
+<div *ngIf = "user | async as user">
+  <p>{{ user.name }}</p>
+  <p>{{ user.email }}</p>
+</div>
+
 <!-- <h1>Posts</h1>
 <div *ngFor="let post of posts">
   <h2>{{ post.userId }} {{ post.id }}</h2>
@@ -33,10 +38,10 @@
   <p>{{ post.body }}</p>
 </div> -->
 
-<h1>Photos</h1>
+<!-- <h1>Photos</h1>
 <div *ngFor="let photo of photos">
   <img [src]="photo.url" alt="{{ photo.title }}" [style.width.px]="200" [style.height.px]="200">
   <p>{{ photo.title }}</p>
   <p>{{ photo.url }}</p>
-</div>
+</div> -->
 
