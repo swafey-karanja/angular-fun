@@ -45,3 +45,23 @@
   <p>{{ photo.url }}</p>
 </div> -->
 
+<div>
+  <input
+    type="text"
+    name="todoItem"
+    id="todoItem"
+    [value]="newTodoText()"
+    (input)="handleInput($event)"
+  >
+  <button (click)="addTodo()">Add Item</button>
+</div>
+
+<div>
+  <ul>
+    <li *ngFor="let todo of todos(); let i=index">
+      {{ i }} {{ todo.text }}
+      <button (click)="deleteTodo(todo.id)">Remove</button>
+    </li>
+  </ul>
+</div>
+
