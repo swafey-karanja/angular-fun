@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-// import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { AppendPipe } from './pipes/append.pipe';
 import { DataService } from './services/data.service';
 import { PhotoService } from './services/photo.service';
@@ -14,7 +14,7 @@ import { WindowComponent } from "./window/window.component";
 
 @Component({
   selector: 'app-root',
-  imports: [AppendPipe, NgFor, NgIf, AsyncPipe, WindowComponent],
+  imports: [ RouterLink, AppendPipe, NgFor, NgIf, AsyncPipe, WindowComponent],
   providers: [ DataService, PhotoService, UserService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
