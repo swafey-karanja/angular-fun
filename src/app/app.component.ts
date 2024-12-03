@@ -14,7 +14,7 @@ import { WindowComponent } from "./window/window.component";
 
 @Component({
   selector: 'app-root',
-  imports: [ RouterLink, AppendPipe, NgFor, NgIf, AsyncPipe, WindowComponent],
+  imports: [ RouterOutlet, RouterLink, AppendPipe, NgFor, NgIf, AsyncPipe],
   providers: [ DataService, PhotoService, UserService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

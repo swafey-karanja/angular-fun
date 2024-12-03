@@ -1,8 +1,13 @@
-<ul>
-  <li>
-    <a routerLink="/" routerLinkActive="active" >Home</a>
-  </li>
-</ul>
+<nav>
+  <ul>
+    <li>
+      <a routerLink="" routerLinkActive="active" >Home</a>
+    </li>
+    <li>
+      <a routerLink="/window" routerLinkActive="active" >Window</a>
+    </li>
+  </ul>
+</nav>
 
 <p>{{ name | append : "Wairimu" }}</p>
 
@@ -71,5 +76,5 @@
   </ul>
 </div>
 
-<app-window></app-window>
+<router-outlet></router-outlet>
 

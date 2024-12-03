@@ -16,12 +16,12 @@ export class DataService {
     return this.http.get<Posts[]>(this.postsUrl);
   }
 
-  getData () {
-    return [
-      { id: 1, name: 'John' , age: 36, gender: 'male' },
-      { id: 2, name: 'Jane' , age: 24, gender: 'female' },
-      { id: 3, name: 'Mike' ,age:28, gender: 'male' },
-    ];
-  }
+  // getData () {
+  //   return [
+  //     { id: 1, name: 'John' , age: 36, gender: 'male' },
+  //     { id: 2, name: 'Jane' , age: 24, gender: 'female' },
+  //     { id: 3, name: 'Mike' ,age:28, gender: 'male' },
+  //   ];
+  // }
 
 }
