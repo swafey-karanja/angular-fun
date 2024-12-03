@@ -10,10 +10,11 @@ import { Photos } from './models/photos';
 import { UserService } from './services/user.service';
 import { Observable } from 'rxjs';
 import { Todo } from './models/todo';
+import { WindowComponent } from "./window/window.component";
 
 @Component({
   selector: 'app-root',
-  imports: [ AppendPipe, NgFor, NgIf, AsyncPipe],
+  imports: [AppendPipe, NgFor, NgIf, AsyncPipe, WindowComponent],
   providers: [ DataService, PhotoService, UserService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

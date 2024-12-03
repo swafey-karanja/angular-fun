@@ -1,1 +1,25 @@
-<p>window works!</p>
+<form [formGroup]="userForm" (ngSubmit)="onSubmitForm()" >
+  <div>
+    <label for="name">Name : </label>
+    <input type="text" name="name" id="name" formControlName="name" >
+    <label for="email">Email : </label>
+    <input type="text" name="email" id="email" formControlName="email" >
+  </div>
+  <div formGroupName="address">
+    <label for="street">Street : </label>
+    <input type="text" name="street" id="street" formControlName="street" >
+    <label for="city">City : </label>
+    <input type="text" name="city" id="city" formControlName="city" >
+  </div>
+  <div formArrayName="phoneNumbers" >
+    <div *ngFor=" let phoneNumber of phoneNumbers.controls; let i = index" >
+      <label for="i">PhoneNumber {{ i+1 }}</label>
+      <input type="number" name="phone" id="phone" [formControlName]="i" >
+      <button (click)="removePhoneNumber(i)" >Remove</button>
+    </div>
+    <button  (click)="addPhoneNumberField()">Add</button>
+  </div>
+  <div>
+    <button type="submit" [disabled]="!userForm.valid">Submit</button>
+  </div>
+</form>
