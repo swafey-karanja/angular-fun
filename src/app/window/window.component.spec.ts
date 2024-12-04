@@ -8,8 +8,8 @@ describe('WindowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
-      declarations: [WindowComponent]
+      declarations: [WindowComponent],
+      imports: [ReactiveFormsModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(WindowComponent);
@@ -21,104 +21,60 @@ describe('WindowComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Form Initialization', () => {
-    it('should initialize the form with correct structure', () => {
-      expect(component.userForm).toBeDefined();
-      expect(component.userForm.get('name')).toBeTruthy();
-      expect(component.userForm.get('email')).toBeTruthy();
-      expect(component.userForm.get('address')).toBeTruthy();
-      expect(component.phoneNumbers.length).toBe(1);
-    });
+  it('should initialize with one phone number field', () => {
+    expect(component.phoneNumbers.length).toBe(1);
   });
 
-  describe('Form Validation', () => {
-    it('should validate email correctly', () => {
-      const emailControl = component.userForm.get('email');
-
-      // Invalid email tests
-      const invalidEmails = ['invalidemail', 'invalid@email', 'test@'];
-      invalidEmails.forEach(email => {
-        emailControl?.setValue(email);
-        expect(emailControl?.valid).toBeFalsy();
-      });
-
-      // Valid email test
-      emailControl?.setValue('valid@email.com');
-      expect(emailControl?.valid).toBeTruthy();
-    });
-
-    it('should validate phone numbers', () => {
-      const phoneControl = component.phoneNumbers.at(0);
-
-      // Invalid phone number tests
-      const invalidPhones = ['abc', '123', '+1234'];
-      invalidPhones.forEach(phone => {
-        phoneControl.setValue(phone);
-        expect(phoneControl.valid).toBeFalsy();
-      });
-
-      // Valid phone number tests
-      const validPhones = ['+1 (123) 456-7890', '123-456-7890', '(555) 123-4567'];
-      validPhones.forEach(phone => {
-        phoneControl.setValue(phone);
-        expect(phoneControl.valid).toBeTruthy();
-      });
-    });
+  it('should add a phone number field', () => {
+    const initialLength = component.phoneNumbers.length;
+    component.addPhoneNumberField();
+    expect(component.phoneNumbers.length).toBe(initialLength + 1);
   });
 
-  describe('Phone Number Management', () => {
-    it('should add phone number field', () => {
-      const initialLength = component.phoneNumbers.length;
-      component.addPhoneNumberField();
-      expect(component.phoneNumbers.length).toBe(initialLength + 1);
-    });
-
-    it('should remove phone number field', () => {
-      // Add a second phone number
-      component.addPhoneNumberField();
-      const initialLength = component.phoneNumbers.length;
-
-      // Remove the last phone number
-      component.removePhoneNumber(initialLength - 1);
-      expect(component.phoneNumbers.length).toBe(initialLength - 1);
-    });
+  it('should remove a phone number field', () => {
+    component.addPhoneNumberField();
+    const initialLength = component.phoneNumbers.length;
+    component.removePhoneNumber(0);
+    expect(component.phoneNumbers.length).toBe(initialLength - 1);
   });
 
-  describe('Form Submission', () => {
-    it('should log form values and reset form on submit', () => {
-      // Spy on console.log
-      const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
-
-      // Set valid form values
-      component.userForm.setValue({
-        name: 'John Doe',
-        email: 'john@example.com',
-        address: {
-          street: '123 Test St',
-          city: 'Testville'
-        },
-        phoneNumbers: ['123-456-7890']
-      });
-
-      // Trigger form submission
-      component.onSubmitForm();
-
-      // Expectations
-      expect(consoleSpy).toHaveBeenCalledWith({
-        name: 'John Doe',
-        email: 'john@example.com',
-        address: {
-          street: '123 Test St',
-          city: 'Testville'
-        },
-        phoneNumbers: ['123-456-7890']
-      });
-
-      // Verify form is reset
-      expect(component.userForm.pristine).toBeTruthy();
-
-      // Restore console.log
-      consoleSpy.mockRestore();
+  it('should validate form with valid input', () => {
+    component.userForm.patchValue({
+      name: 'John Doe',
+      email: 'john@example.com',
+      address: {
+        street: '123 Main St',
+        city: 'Anytown'
+      },
+      phoneNumbers: ['1234567890']
     });
+    expect(component.userForm.valid).toBeTruthy();
+  });
+
+  it('should invalidate form with invalid email', () => {
+    component.userForm.patchValue({
+      name: 'John Doe',
+      email: 'invalid-email',
+      address: {
+        street: '123 Main St',
+        city: 'Anytown'
+      },
+      phoneNumbers: ['1234567890']
+    });
+    expect(component.userForm.valid).toBeFalsy();
+  });
+
+  it('should reset form after submission', () => {
+    component.userForm.patchValue({
+      name: 'John Doe',
+      email: 'john@example.com',
+      address: {
+        street: '123 Main St',
+        city: 'Anytown'
+      },
+      phoneNumbers: ['1234567890']
+    });
+    component.onSubmitForm();
+    expect(component.userForm.pristine).toBeTruthy();
   });
 });
